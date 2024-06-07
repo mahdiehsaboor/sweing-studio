@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>order Profile</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/font-awesome.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+
+</head>
+<body>
+<div class="container">
+    <form action="/order" method="post"  class="form-group">
+        Order_date<input class="form-control" type="date" name="order_date">
+        Delivery_date<input class="form-control" type="date" name="delivery_date">
+        Status <input class="form-control" type="checkbox" name="status">
+        Customer_id <input class="form-control" type="text" name="customer_id">
+        Tailor_id <input class="form-control" type="text" name="tailor_id">
+        Clothes_id <input class="form-control" type="text" name="clothes_id">
+
+
+        <button class="btn btn-success">Save <i class="fa fa-save"></i></button>
+    </form>
+
+</div>
+
+<div id="table-div">
+        <table  class="table table-hover">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Order Date</th>
+            <th>Delivery Date</th>
+            <th>Status</th>
+            <th>Customer ID</th>
+            <th>Tailor ID</th>
+            <th>Clothes ID</th>
+            <th>Operation</th>
+
+        </tr>
+        </thead>
+
+        <tbody>
+        {% for order in order_list[1]: %}
+        <tr>
+
+            <td>{{ order.id }}</td>
+            <td>{{ order.order_date }}</td>
+            <td>{{ order.delivery_date }}</td>
+            <td>{{ 'Compelete' if order.status else 'Pending' }}</td>
+            <td>{{ order.customer_id }}</td>
+            <td>{{ order.tailor_id }}</td>
+            <td>{{ order.clothes_id }}</td>
+            <td>
+                <button class="btn btn-warning" onclick="edit({{order.id}})" >Edit <i class="fa fa-edit"></i></button>
+                <button class="btn btn-danger" onclick="remove({{order.id}})">Remove <i class="fa fa-remove"></i></button>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+<script src="{{url_for('static', filename='js/bootstrap.bundle.min.js')}}"></script>
+<script src="{{url_for('static', filename='js/font-awesome.js')}}"></script>
+<script src="{{url_for('static', filename='js/order.js')}}"></script>
+</body>
+</html>

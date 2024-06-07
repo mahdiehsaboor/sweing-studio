@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>tailor Profile</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/font-awesome.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+
+</head>
+<body>
+<div class="container">
+    <form action="/tailor" method="post"  class="form-group">
+        Name <input class="form-control" type="text" name="name">
+        Family <input class="form-control" type="text" name="family">
+        Phone <input class="form-control" type="text" name="Phone">
+        Salary <input class="form-control" type="number" name="salary">
+        National_id <input class="form-control" type="text" name="national_id">
+        Birth_date <input class="form-control" type="date" name="birth_date">
+        Status <input class="form-control" type="checkbox" name="status">
+
+
+        <button class="btn btn-success">Save <i class="fa fa-save"></i></button>
+    </form>
+
+</div>
+
+<div id="table-div">
+        <table  class="table table-hover">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Family</th>
+            <th>Phone</th>
+            <th>Salary</th>
+            <th>National ID</th>
+            <th>Birth Date</th>
+            <th>Status</th>
+            <th>Operation</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        {% for tailor in tailor_list[1]: %}
+        <tr>
+            <td>{{ tailor.id }}</td>
+            <td>{{ tailor.name }}</td>
+            <td>{{ tailor.family }}</td>
+            <td>{{ tailor.phone }}</td>
+            <td>{{ tailor.salary }}</td>
+            <td>{{ tailor.national_id }}</td>
+            <td>{{ tailor.birth_date }}</td>
+            <td>{{ 'Active' if tailor.status else 'Inactive' }}</td>
+            <td>
+                <button class="btn btn-warning" onclick="edit({{tailor.id}})" >Edit <i class="fa fa-edit"></i></button>
+                <button class="btn btn-danger" onclick="remove({{tailor.id}})">Remove <i class="fa fa-remove"></i></button>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+<script src="{{url_for('static', filename='js/bootstrap.bundle.min.js')}}"></script>
+<script src="{{url_for('static', filename='js/font-awesome.js')}}"></script>
+<script src="{{url_for('static', filename='js/tailor.js')}}"></script>
+</body>
+</html>

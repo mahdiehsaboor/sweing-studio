@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Customer Profile</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/font-awesome.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+
+</head>
+<body>
+<div class="container">
+    <form action="/customer" method="post"  class="form-group">
+        Name_clothes <input class="form-control" type="text" name="name_clothes">
+        Fabric <input class="form-control" type="text" name="fabric">
+        Color <input class="form-control" type="text" name="color">
+        Price <input class="form-control" type="number" step="0.01" name="price">
+        Size <input class="form-control" type="text" name="size">
+        Description <input class="form-control" type="text" name="description">
+
+        <button class="btn btn-success">Save <i class="fa fa-save"></i></button>
+    </form>
+
+</div>
+
+<div id="table-div">
+        <table  class="table table-hover">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Fabric</th>
+            <th>Color</th>
+            <th>Price</th>
+            <th>Size</th>
+            <th>Description</th>
+            <th>Operation</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        {% for customer in customer_list[1]: %}
+        <tr>
+            <td>{{ clothes.id }}</td>
+            <td>{{ clothes.name_clothes }}</td>
+            <td>{{ clothes.fabric }}</td>
+            <td>{{ clothes.color }}</td>
+            <td>{{ clothes.price }}</td>
+            <td>{{ clothes.size }}</td>
+            <td>{{ clothes.description }}</td>
+            <td>
+                <button class="btn btn-warning" onclick="edit({{customer.id}})" >Edit <i class="fa fa-edit"></i></button>
+                <button class="btn btn-danger" onclick="remove({{customer.id}})">Remove <i class="fa fa-remove"></i></button>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+<script src="{{url_for('static', filename='js/bootstrap.bundle.min.js')}}"></script>
+<script src="{{url_for('static', filename='js/font-awesome.js')}}"></script>
+<script src="{{url_for('static', filename='js/customer.js')}}"></script>
+</body>
+</html>
+
